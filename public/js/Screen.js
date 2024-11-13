@@ -229,10 +229,10 @@ function Result() {
 
         str = 'どちらかが勝ちました！';
 
-        if (game.myPoint > game.oppoPoint) {
+        if (game.myPoint < game.oppoPoint) {
             str = 'あなたの勝利！';
         }
-        else if (game.myPoint < game.oppoPoint) {
+        else if (game.myPoint > game.oppoPoint) {
             str = 'あなたの敗北！';
         }
         if (game.myPoint == game.oppoPoint) {
