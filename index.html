@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>繰り返し囚人のジレンマ</title>
+
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body>
+    <canvas id="canvas-2d"></canvas>
+    <div id="elementDiv">
+        <div id="coverLoad"></div>
+    </div>
+    <div id="blocklyDiv"></div>
+    <xml id="toolbox" style="display: none">
+        <block type="silent"></block>
+        <block type="confess"></block>
+        <block type="oppo_silent"></block>
+        <block type="oppo_confess"></block>
+        <block type="refer_oppo"></block>
+        <block type="controls_repeat_ext"></block>
+        <block type="math_number">
+    </xml>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Load Blockly core -->
+    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
+    <!-- Load the default blocks -->
+    <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
+    <!-- Load a generator -->
+    <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
+    <!-- Load a message file -->
+    <script src="https://unpkg.com/blockly/msg/ja.js"></script>
+
+    <script src="./js/myblock.js"></script>
+    <script src="./js/Game.js"></script>
+    <script src="./js/Screen.js"></script>
+</body>
+
+</html>

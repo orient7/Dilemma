@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+
+body {
+    margin: 0;
+    background: #00bfff;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+#coverLoad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #00bfff;
+    z-index: 80;
+}
+
+#blocklyDiv {
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Blocklyのワークスペース全体 */
+.blocklyWorkspace {
+    background-color: #e0e0e0;
+    /* 例: 薄いグレー */
+}
+
+.title {
+    display: block;
+    width: 50vw;
+    margin: 20vh auto;
+}
+
+.parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option {
+    font-family: "Kiwi Maru", serif;
+    width: 50vw;
+    font-size: 30px;
+    margin: 2vw;
+    text-align: center;
+    color: white;
+    border: 4px white solid;
+    transform: skew(-20deg);
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.option:hover {
+    color: #00bfff;
+    background-color: white;
+}
+
+.load {
+    font-family: "Kiwi Maru", serif;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+}
+
+.confirm {
+    font-family: "Kiwi Maru", serif;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    margin: auto;
+    display: inline-block;
+    color: #00bfff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
+    font-size: 28px;
+    border: 4px #00bfff solid;
+    z-index: 80;
+}
+
+.confirm:hover {
+    color: white;
+    background: #00bfff;
+}
+
+.animation {
+    display: flex;
+    height: 0vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #00bfff;
+    z-index: 100;
+    animation-duration: 2s;
+    animation-name: matching;
+}
+
+.animation_text {
+    font-family: "Kiwi Maru", serif;
+    color: white;
+    text-align: center;
+}
+
+@keyframes matching {
+    from {
+        font-size: 10px;
+        height: 100vh;
+    }
+
+    75% {
+        font-size: 50px;
+    }
+
+    to {
+        font-size: 0px;
+        height: 0vh;
+    }
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    75% {
+        font-size: 300%;
+        margin-left: 25%;
+        width: 150%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+.instruction {
+    font-family: "Kiwi Maru", serif;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #00bfff;
+    font-size: 28px;
+    z-index: 80;
+}
+
+.result {
+    font-family: "Kiwi Maru", serif;
+    position: absolute;
+    top: 50px;
+    margin: auto;
+    display: inline-block;
+    color: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #00bfff;
+    text-align: center;
+    line-height: 200px;
+    font-size: 40px;
+    border: 4px white solid;
+}
