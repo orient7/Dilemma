@@ -128,7 +128,7 @@ class Game {
         });
 
         if (this.myAction.includes('SKIP')) {
-            this.myAction = [];
+            this.myAction.pop();
             this.currentTurn = 0;
         }
         else {
