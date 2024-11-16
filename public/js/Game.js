@@ -117,6 +117,10 @@ class Game {
     }
 
     checkArray() {
+        while(this.myAction.length > this.exeNum){
+            this.myAction.pop();
+        }
+        
         this.socket.emit('send-the-action', {
             socketId: this.socket.id,
             room: this.room,
