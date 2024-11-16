@@ -115,7 +115,7 @@ function Play() {
 
         aElement = document.createElement('div');
         aElement.textContent = '決定！';
-        aElement.className = 'confirm animate__animated animate__rubberBand';
+        aElement.className = 'confirm animate__animated animate__pulse';
         aElement.onclick = function() {
             // checkCodeからの返り値がtrueであればボタンを消去
             if (game.checkCode()) {
@@ -140,7 +140,7 @@ function Result() {
 
         aElement = document.createElement('div');
         aElement.textContent = 'もう一度遊ぶ！';
-        aElement.className = 'option animate__animated animate__rubberBand';
+        aElement.className = 'option animate__animated animate__bounceInUp';
         aElement.onclick = function() {
             // サーバーに'enter-the-room'を送信
             socket.emit('enter-the-room');
@@ -151,7 +151,7 @@ function Result() {
 
         aElement = document.createElement('div');
         aElement.textContent = '終わり';
-        aElement.className = 'option animate__animated animate__rubberBand';
+        aElement.className = 'option animate__animated animate__bounceInUp';
         aElement.onclick = function() {
             gameChange(Home);
         };
@@ -469,3 +469,39 @@ const rand = function(min, max) {
 
     return Math.random() * (max - min + 1) + min;
 };
+
+// キャンバス内でのマウスの座標を取得
+// canvas.addEventListener('mousemove', (e) => {
+//     const w = window.innerHeight * (canvas.width / canvas.height);
+
+//     if (window.innerWidth < w) {
+//         const finalHeight = window.innerWidth * canvas.height / canvas.width
+//         let margin = ((window.innerHeight - finalHeight) / 2) * (canvas.height / finalHeight);
+//         screen.mouseX = e.clientX * (canvas.width / window.innerWidth);
+//         screen.mouseY = e.clientY * (canvas.height / finalHeight) - margin;
+//     }
+//     else if (window.innerWidth > w) {
+//         const finalWidth = window.innerHeight * canvas.width / canvas.height
+//         let margin = ((window.innerWidth - finalWidth) / 2) * (canvas.width / finalWidth);
+//         screen.mouseX = e.clientX * (canvas.width / finalWidth) - margin;
+//         screen.mouseY = e.clientY * (canvas.height / window.innerHeight);
+//     }
+// });
+
+// キャンバス内でのクリックの座標を取得
+// canvas.addEventListener('click', (e) => {
+//     const w = window.innerHeight * (canvas.width / canvas.height);
+
+//     if (window.innerWidth < w) {
+//         const finalHeight = window.innerWidth * canvas.height / canvas.width
+//         let margin = ((window.innerHeight - finalHeight) / 2) * (canvas.height / finalHeight);
+//         screen.clickX = e.clientX * (canvas.width / window.innerWidth);
+//         screen.clickY = e.clientY * (canvas.height / finalHeight) - margin;
+//     }
+//     else if (window.innerWidth > w) {
+//         const finalWidth = window.innerHeight * canvas.width / canvas.height
+//         let margin = ((window.innerWidth - finalWidth) / 2) * (canvas.width / finalWidth);
+//         screen.clickX = e.clientX * (canvas.width / finalWidth) - margin;
+//         screen.clickY = e.clientY * (canvas.height / window.innerHeight);
+//     }
+// });
