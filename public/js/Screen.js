@@ -22,6 +22,8 @@ context.imageSmoothingEnabled = false;
 let effect = [];
 let counter = [];
 
+let assets;
+
 let flag = false;
 let ui;
 let game;
@@ -39,7 +41,7 @@ function Home() {
         aElement.className = 'parent';
         $('#elementDiv').append(aElement);
 
-        $(aElement).css({ 'margin-top': '10vh' })
+        $(aElement).css({ 'margin-top': '50vh' })
 
         aElement = document.createElement('div');
         aElement.textContent = 'スタート';
@@ -137,14 +139,6 @@ function Result() {
         $(aElement).css({ 'margin-top': '80vh' })
 
         aElement = document.createElement('div');
-        aElement.textContent = '終わり';
-        aElement.className = 'option animate__animated animate__rubberBand';
-        aElement.onclick = function() {
-            gameChange(Home);
-        };
-        $('.parent').append(aElement);
-
-        aElement = document.createElement('div');
         aElement.textContent = 'もう一度遊ぶ！';
         aElement.className = 'option animate__animated animate__rubberBand';
         aElement.onclick = function() {
@@ -155,30 +149,15 @@ function Result() {
         };
         $('.parent').append(aElement);
 
-        for (let i = 0; i < 8; i++) {
-            const x = 80 + i * 60;
-            const y = 300;
-            let number = 0;
+        aElement = document.createElement('div');
+        aElement.textContent = '終わり';
+        aElement.className = 'option animate__animated animate__rubberBand';
+        aElement.onclick = function() {
+            gameChange(Home);
+        };
+        $('.parent').append(aElement);
 
-            if (String(game.myPoint)[i]) {
-                number = Number(String(game.myPoint)[i]);
-            }
-            const duration = 500 - i * 50;
-            counter.push(new Counter(x, y, number, duration));
-        }
-
-        for (let i = 0; i < 8; i++) {
-            const x = (canvas.width / 2 + 80) + i * 60;
-            const y = 300;
-            let number = 0;
-            if (String(game.oppoPoint)[i]) {
-                number = Number(String(game.oppoPoint)[i]);
-            }
-            const duration = 500 - i * 50;
-            counter.push(new Counter(x, y, number, duration));
-        }
-
-        sleep = 600;
+        setCounter();
 
         flag = true;
     }
@@ -186,37 +165,42 @@ function Result() {
     let str, x, y, w;
 
     context.save();
-
+    
+    context.fillStyle = assets.lineColor;
+    context.font = assets.resultMyText.fontsize + 'px null';
+    
     str = 'あなたの懲役は...';
-    x = 80;
-    y = 150;
-    context.fillStyle = 'white';
-    context.font = '40px null';
+    x = assets.resultMyText.x;
+    y = assets.resultMyText.y;
+    
     context.fillText(str, x, y);
 
     context.restore();
 
     context.save();
+    
+    context.fillStyle = assets.lineColor;
+    context.font = assets.resultOppoText.fontsize + 'px null';
 
     str = '相手の懲役は...';
-    x = canvas.width / 2 + 80;
-    y = 150;
-    context.fillStyle = 'white';
-    context.font = '40px null';
+    x = assets.resultOppoText.x;
+    y = assets.resultOppoText.y;
     context.fillText(str, x, y);
 
     context.restore();
 
     context.save();
-    context.fillStyle = 'white';
-    context.font = '50px null';
+    
+    context.fillStyle = assets.lineColor;
+    context.font = assets.resultUnitFontSize + 'px null';
 
     str = '年';
-    x = (canvas.width / 2) - 100;
-    y = 300;
+    x = assets.resultMyUnit.x;
+    y = assets.resultMyUnit.y;
     context.fillText(str, x, y);
 
-    x = canvas.width - 100;
+    x = assets.resultOppoUnit.x;
+    y = assets.resultOppoUnit.y;
     context.fillText(str, x, y);
 
     context.restore();
@@ -224,24 +208,24 @@ function Result() {
     if ((sleep--) <= 0) {
         context.save();
 
-        context.fillStyle = 'white';
-        context.font = '80px null';
+        context.fillStyle = assets.lineColor;
+        context.font = assets.resultText.fontsize + 'px null';
 
-        str = 'どちらかが勝ちました！';
+        str = 'どちらかが勝ちました';
 
-        if (game.myPoint < game.oppoPoint) {
-            str = 'あなたの勝利！';
+        if (game.myPoint > game.oppoPoint) {
+            str = 'あなたの敗北';
         }
-        else if (game.myPoint > game.oppoPoint) {
-            str = 'あなたの敗北！';
+        else if (game.myPoint < game.oppoPoint) {
+            str = 'あなたの勝利';
         }
         if (game.myPoint == game.oppoPoint) {
-            str = '引き分け！';
+            str = '引き分け';
         }
 
         w = context.measureText(str).width;
         x = canvas.width / 2 - w / 2;
-        y = 450;
+        y = assets.resultText.y;
 
         context.fillText(str, x, y);
 
@@ -255,13 +239,42 @@ function Result() {
 
 }
 
+function setCounter() {
+    counter = [];
+
+    for (let i = 0; i < 8; i++) {
+        const x = assets.resultMyNum.x + i * assets.resultNumBetween;
+        const y = assets.resultMyNum.y;
+        let number = 0;
+
+        if (String(game.myPoint)[i]) {
+            number = Number(String(game.myPoint)[i]);
+        }
+        const duration = 500 - i * 50;
+        counter.push(new Counter(x, y, number, duration));
+    }
+
+    for (let i = 0; i < 8; i++) {
+        const x = assets.resultOppoNum.x + i * assets.resultNumBetween;
+        const y = assets.resultOppoNum.y;
+        let number = 0;
+        if (String(game.oppoPoint)[i]) {
+            number = Number(String(game.oppoPoint)[i]);
+        }
+        const duration = 500 - i * 50;
+        counter.push(new Counter(x, y, number, duration));
+    }
+    
+    sleep = 600;
+}
+
 class Effect {
     constructor() {
         this.x = rand(0, canvas.width);
         this.y = rand(canvas.height, canvas.height + 100);
         this.angle = rand(0, 360);
-        this.size = rand(10, 60);
-        this.vy = rand(-4, -1);
+        this.size = rand(assets.effectSize.min, assets.effectSize.max);
+        this.vy = rand(assets.effectSpeed.min, assets.effectSpeed.max);
         this.vangle = rand(128, 256);
     }
 
@@ -274,7 +287,8 @@ class Effect {
         // 画像描画
         context.save();
 
-        context.strokeStyle = 'white';
+        context.lineWidth = assets.effectLineWidth;
+        context.strokeStyle = assets.lineColor;
 
         context.rotate(this.angle);
         context.strokeRect(-this.size * 0.5, -this.size * 0.5, this.size, this.size);
@@ -290,6 +304,7 @@ class Effect {
         if (this.y <= -this.size) {
             this.y = canvas.height;
             this.x = rand(0, canvas.width);
+
         }
     }
 }
@@ -306,8 +321,8 @@ class Counter {
     render() {
         context.save();
 
-        context.fillStyle = 'white';
-        context.font = '80px null';
+        context.fillStyle = assets.lineColor;
+        context.font = assets.resultNumFontSize + 'px null';
         context.fillText(this.count, this.x, this.y);
 
         context.restore();
@@ -406,6 +421,9 @@ $(window).on('load', function() {
     // ソケットの初期化
     initSocket(socket);
 
+    // 描画サイズを初期化
+    setSize();
+
     // エフェクトの追加
     for (let i = 0; i < 64; i++) {
         effect.push(new Effect());
@@ -419,45 +437,35 @@ $(window).on(
         socket.disconnect();
     });
 
+$(window).resize(() => {
+    // キャンバスのサイズを変更
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // 描画サイズの変更
+    setSize();
+
+    effect = [];
+
+    // エフェクトの追加
+    for (let i = 0; i < 64; i++) {
+        effect.push(new Effect());
+    }
+
+    // もしリザルト画面であれば、カウンターを再構築
+    if (ui == Result) setCounter();
+});
+
+function setSize() {
+    const vw = canvas.width / 100;
+    const vh = canvas.height / 100;
+
+    assets = new Assets(vw, vh);
+}
+
 const rand = function(min, max) {
     // 整数指定
     // return Math.floor(Math.random() * (max - min + 1)) + min;
 
     return Math.random() * (max - min + 1) + min;
 };
-
-// キャンバス内でのマウスの座標を取得
-// canvas.addEventListener('mousemove', (e) => {
-//     const w = window.innerHeight * (canvas.width / canvas.height);
-
-//     if (window.innerWidth < w) {
-//         const finalHeight = window.innerWidth * canvas.height / canvas.width
-//         let margin = ((window.innerHeight - finalHeight) / 2) * (canvas.height / finalHeight);
-//         screen.mouseX = e.clientX * (canvas.width / window.innerWidth);
-//         screen.mouseY = e.clientY * (canvas.height / finalHeight) - margin;
-//     }
-//     else if (window.innerWidth > w) {
-//         const finalWidth = window.innerHeight * canvas.width / canvas.height
-//         let margin = ((window.innerWidth - finalWidth) / 2) * (canvas.width / finalWidth);
-//         screen.mouseX = e.clientX * (canvas.width / finalWidth) - margin;
-//         screen.mouseY = e.clientY * (canvas.height / window.innerHeight);
-//     }
-// });
-
-// キャンバス内でのクリックの座標を取得
-// canvas.addEventListener('click', (e) => {
-//     const w = window.innerHeight * (canvas.width / canvas.height);
-
-//     if (window.innerWidth < w) {
-//         const finalHeight = window.innerWidth * canvas.height / canvas.width
-//         let margin = ((window.innerHeight - finalHeight) / 2) * (canvas.height / finalHeight);
-//         screen.clickX = e.clientX * (canvas.width / window.innerWidth);
-//         screen.clickY = e.clientY * (canvas.height / finalHeight) - margin;
-//     }
-//     else if (window.innerWidth > w) {
-//         const finalWidth = window.innerHeight * canvas.width / canvas.height
-//         let margin = ((window.innerWidth - finalWidth) / 2) * (canvas.width / finalWidth);
-//         screen.clickX = e.clientX * (canvas.width / finalWidth) - margin;
-//         screen.clickY = e.clientY * (canvas.height / window.innerHeight);
-//     }
-// });
