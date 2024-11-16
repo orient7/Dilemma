@@ -37,7 +37,7 @@ canvas {
 
 .title {
     display: block;
-    width: 50vw;
+    width: 60vw;
     margin: 20vh auto;
 }
 
@@ -55,14 +55,14 @@ canvas {
 .option {
     font-family: "Kiwi Maru", serif;
     width: 50vw;
-    font-size: 30px;
+    font-size: 2vw;
     margin: 2vw;
     text-align: center;
     color: white;
-    border: 4px white solid;
+    border: 0.2vw white solid;
     transform: skew(-20deg);
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-top-left-radius: 2vw;
+    border-bottom-right-radius: 2vw;
 }
 
 .option:hover {
@@ -72,7 +72,7 @@ canvas {
 
 .load {
     font-family: "Kiwi Maru", serif;
-    font-size: 40px;
+    font-size: 3vw;
     color: white;
     text-align: center;
 }
@@ -80,18 +80,18 @@ canvas {
 .confirm {
     font-family: "Kiwi Maru", serif;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 1vw;
+    right: 1vw;
     margin: auto;
     display: inline-block;
     color: #00bfff;
-    width: 100px;
-    height: 100px;
+    width: 8vw;
+    height: 8vw;
     border-radius: 50%;
     text-align: center;
-    line-height: 100px;
-    font-size: 28px;
-    border: 4px #00bfff solid;
+    line-height: 8vw;
+    font-size: 2vw;
+    border: 0.2vw #00bfff solid;
     z-index: 80;
 }
 
@@ -119,16 +119,16 @@ canvas {
 
 @keyframes matching {
     from {
-        font-size: 10px;
+        font-size: 2vw;
         height: 100vh;
     }
 
     75% {
-        font-size: 50px;
+        font-size: 4vw;
     }
 
     to {
-        font-size: 0px;
+        font-size: 0vw;
         height: 0vh;
     }
 }
@@ -154,10 +154,10 @@ canvas {
 .instruction {
     font-family: "Kiwi Maru", serif;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1vw;
+    right: 1vw;
     color: #00bfff;
-    font-size: 28px;
+    font-size: 2vw;
     z-index: 80;
 }
 
