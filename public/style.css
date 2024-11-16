@@ -160,20 +160,3 @@ canvas {
     font-size: 2vw;
     z-index: 80;
 }
-
-.result {
-    font-family: "Kiwi Maru", serif;
-    position: absolute;
-    top: 50px;
-    margin: auto;
-    display: inline-block;
-    color: white;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: #00bfff;
-    text-align: center;
-    line-height: 200px;
-    font-size: 40px;
-    border: 4px white solid;
-}
