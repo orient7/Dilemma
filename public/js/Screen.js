@@ -120,6 +120,8 @@ function Play() {
             // checkCodeからの返り値がtrueであればボタンを消去
             if (game.checkCode()) {
                 aElement.remove();
+                
+                game.doCode();
             }
         };
         $('#elementDiv').append(aElement);
@@ -165,20 +167,20 @@ function Result() {
     let str, x, y, w;
 
     context.save();
-    
+
     context.fillStyle = assets.lineColor;
     context.font = assets.resultMyText.fontsize + 'px null';
-    
+
     str = 'あなたの懲役は...';
     x = assets.resultMyText.x;
     y = assets.resultMyText.y;
-    
+
     context.fillText(str, x, y);
 
     context.restore();
 
     context.save();
-    
+
     context.fillStyle = assets.lineColor;
     context.font = assets.resultOppoText.fontsize + 'px null';
 
@@ -190,7 +192,7 @@ function Result() {
     context.restore();
 
     context.save();
-    
+
     context.fillStyle = assets.lineColor;
     context.font = assets.resultUnitFontSize + 'px null';
 
@@ -264,7 +266,7 @@ function setCounter() {
         const duration = 500 - i * 50;
         counter.push(new Counter(x, y, number, duration));
     }
-    
+
     sleep = 600;
 }
 
