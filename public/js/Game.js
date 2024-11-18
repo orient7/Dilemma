@@ -20,7 +20,7 @@ class Game {
             return Math.random() < 0.5;
         }
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 10000; i++) {
             this.testAction[i] = getRandomBoolean();
         }
     }
@@ -101,8 +101,6 @@ class Game {
             if (this.testCode()) {
                 this.check = true;
 
-                this.doCode();
-
                 return true;
             }
             else {
@@ -128,7 +126,7 @@ class Game {
         });
 
         if (this.myAction.includes('SKIP')) {
-            this.myAction.pop();
+            this.myAction = [];
             this.currentTurn = 0;
         }
         else {
